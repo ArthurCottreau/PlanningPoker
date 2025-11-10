@@ -24,9 +24,32 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install pytest pytest-html
-
+    
     - name: Run tests and generate HTML report
       run: |
         pytest test_calculatrice.py
       env:
         CI: true
+
+  documentation:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Install Doxygen
+      run: sudo apt-get install doxygen -y
+
+    - name : Install Dot
+      run : sudo apt-get install graphviz -y
+
+    - name: Generate Documentation
+      run: doxygen conf/Doxyfile
+
+    - name: Deploy Documentation
+    
+      uses: peaceiris/actions-gh-pages@v3
+      with:
+        github_token: ${{ secrets.GITHUB_TOKEN }}
+        publish_dir: ./documentation
