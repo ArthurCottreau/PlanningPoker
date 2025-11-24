@@ -1,4 +1,4 @@
-name: Tests unitaire Python
+name: Tests unitaire + Documentation Doxygen
 on:
   push:
     branches:
@@ -27,7 +27,7 @@ jobs:
     
     - name: Run tests and generate HTML report
       run: |
-        pytest src/test_calculatrice.py
+        pytest src/tests/test.py
       env:
         CI: true
 
