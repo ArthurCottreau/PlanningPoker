@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['myclass_0',['MyClass',['../classMyClass_1_1MyClass.html',1,'MyClass']]]
+  ['router_0',['Router',['../classrouter_1_1Router.html',1,'router']]]
 ];
