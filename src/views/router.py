@@ -9,7 +9,7 @@ class Router:
         self.page = page
         self.ft = ft
         self.routes = {
-            "/": defPage(page),
+            "/": Page1(page),
             "/page1": Page1(page),
             "/page2": Page2(page)
         }
