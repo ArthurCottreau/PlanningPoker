@@ -1,17 +1,17 @@
 import flet as ft
 
-from views.def_page import defPage
+from views.login_page import PageLogin
+from views.game_page import PageGame
 from views.page1 import Page1
-from views.page2 import Page2
 
 class Router:
     def __init__(self, page):
         self.page = page
         self.ft = ft
         self.routes = {
-            "/": Page1(page),
-            "/page1": Page1(page),
-            "/page2": Page2(page)
+            "/": PageLogin(page),
+            "/game": PageGame(page),
+            "/page1": Page1(page)
         }
         self.body = ft.Container(content=self.routes['/'])
 
