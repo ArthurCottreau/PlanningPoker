@@ -1,11 +1,25 @@
 import flet as ft
 
+from misc.save_data import SaveData
+
 def PageLogin(page):
+
+    def create_game(e: ft.FilePickerResultEvent):
+        file = e.files[0]
+
+        mySD = SaveData()
+        mySD.load_json(file.path)
+
+        if mySD.get_element("tasks"):
+            page.go('/game')
 
     def next_click(e):
         page.go('/page1')
 
     page.bgcolor = ft.Colors.GREY
+
+    file_picker = ft.FilePicker(on_result=create_game)
+    page.overlay.append(file_picker)
 
     content = ft.Row(
         [
@@ -66,7 +80,10 @@ def PageLogin(page):
                             ),
                             bgcolor=ft.Colors.INDIGO,
                             opacity_on_click=0.3,
-                            on_click=next_click,
+                            on_click=lambda _: file_picker.pick_files(
+                                allow_multiple=False,
+                                allowed_extensions=["json"]
+                            ),
                             width=page.width
                         ),
                         ft.CupertinoButton(
