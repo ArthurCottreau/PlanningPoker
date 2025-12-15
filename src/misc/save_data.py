@@ -8,6 +8,9 @@ class SaveData:
     def __init__(self):
         self.file_data = ""
 
+    def reset(self):
+        self.file_data = {}
+
     def is_json(self, myjson):
         try:
             json.loads(myjson)

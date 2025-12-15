@@ -2,7 +2,7 @@ import flet as ft
 
 from views.login_page import PageLogin
 from views.game_page import PageGame
-from views.page1 import Page1
+from views.task_page import PageTask
 
 class Router:
     def __init__(self, page):
@@ -11,7 +11,7 @@ class Router:
         self.routes = {
             "/": PageLogin(page),
             "/game": PageGame(page),
-            "/page1": Page1(page)
+            "/task": PageTask(page)
         }
         self.body = ft.Container(content=self.routes['/'])
 
