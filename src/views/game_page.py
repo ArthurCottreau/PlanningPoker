@@ -5,16 +5,16 @@ from misc.save_data import SaveData
 def PageGame(page):
     page.bgcolor = ft.Colors.WHITE
 
-    user_name = ft.Text(
-        value="",
+    task_text = ft.Text(
+        value="Êtes-vous prêts?",
         size=30,
         weight=ft.FontWeight.BOLD,
         color=ft.Colors.BLUE_GREY_900
     )
 
-    task_text = ft.Text(
-        value="Êtes-vous prêts?",
-        size=30,
+    user_name = ft.Text(
+        value="",
+        size=20,
         weight=ft.FontWeight.BOLD,
         color=ft.Colors.BLUE_GREY_900
     )
@@ -24,6 +24,7 @@ def PageGame(page):
     tasks = {}
     user_turn = 0
     task_turn = 0
+    first_turn = 0 # Pour mode de jeu moyenne
     results = {}
     turn_results = {}
 
@@ -48,11 +49,29 @@ def PageGame(page):
     file_picker = ft.FilePicker(on_result=save_game)
     page.overlay.append(file_picker)
 
+    def end_game(e):
+        nonlocal current_selection
+
+        # Désélectionne la carte lorsque le choix du joueur est confirmé
+        current_selection.bgcolor = ft.Colors.WHITE
+        current_selection.border = ft.border.all(2, ft.Colors.BLUE_200)
+        current_selection.scale = 1.0
+        current_selection = None
+        result_text.value = "Veuillez choisir une estimation"
+
+        user_name.value = ""
+        task_text.value = "Êtes-vous prêts?"
+
+        file_picker.save_file()
+        page.session.clear()
+        page.go('/')       
+
     def next_turn(e):
         nonlocal names
         nonlocal tasks
         nonlocal user_turn
         nonlocal task_turn
+        nonlocal first_turn
         nonlocal results
         nonlocal turn_results
         nonlocal current_selection
@@ -64,6 +83,7 @@ def PageGame(page):
                 tasks = mySD.get_element("tasks")
                 user_turn = len(names) # Pour le tour préparation
                 task_turn = 0
+                first_turn = 0
                 results = {}
                 turn_results = {}
 
@@ -78,7 +98,31 @@ def PageGame(page):
             if user_turn >= len(names):
                 
                 if page.session.get("game_started"):
-                    turn_results[task_turn - 1] = results
+
+                    # Pour les modes de jeux
+                    if mySD.get_element("gm_moyenne"):
+                        # Un 1er tour d'unanimité - mode de jeu moyenne
+                        if first_turn == 0:
+                            if len(set(results.values())) != 1:
+                                task_turn -= 1
+                            else:
+                                task_turn -= 1
+                                first_turn += 1
+                        else:
+                            first_turn = 0
+
+                            sum_result = 0
+                            for value in results.values():
+                                sum_result += int(value)
+                            
+                            turn_results[task_turn - 1] = sum_result / len(results)
+                    else:
+                        # Pour l'unanimité - mode de jeu strict
+                        if len(set(results.values())) != 1:
+                            task_turn -= 1
+                        else:
+                            turn_results[task_turn - 1] = results[user_name.value]
+                    
                     mySD.set_element("results",turn_results)
 
                 # Mise à jour des tours pour les taches
@@ -90,19 +134,16 @@ def PageGame(page):
                     if page.session.get("game_started"):
                         if results[names[user_turn]] == "☕":
                             if len(set(results.values())) == 1:
-                                file_picker.save_file()
+                                task_turn -= 1
+                                end_game(e)
+                                return
 
                     user_name.value = names[user_turn]
-                    task_text.value = tasks[str(task_turn - 1)]
+                    task_text.value = "Tache : " + tasks[str(task_turn - 1)]
 
                     page.session.set("game_started", 1)
                 else:
-                    user_name.value = ""
-                    task_text.value = "Êtes-vous prêts?"
-
-                    file_picker.save_file()
-                    page.session.clear()
-                    page.go('/')
+                    end_game(e)
 
                 results = {}
             else:
@@ -191,30 +232,31 @@ def PageGame(page):
 
     content = ft.Column(
         [
-            user_name,
             task_text,
-            ft.Divider(height=50, color=ft.Colors.TRANSPARENT), # Espace vide
+            user_name,
+            ft.Divider(height=25, color=ft.Colors.TRANSPARENT), # Espace vide
             result_text,
             ft.Divider(height=25, color=ft.Colors.TRANSPARENT), # Espace vide
             layout_container,
+            ft.Divider(height=10, color=ft.Colors.TRANSPARENT), # Espace vide
             ft.CupertinoButton(
                 content=ft.Row(
                     [
                         ft.Icon(
-                            name=ft.Icons.PEOPLE_OUTLINED,
+                            name=ft.Icons.DONE,
                             color=ft.Colors.WHITE
                         ),
                         ft.Text(
-                            value="Rejoindre Partie",
+                            value="Confirmer selection",
                             color=ft.Colors.WHITE
                         ),
                     ],
-                    alignment=ft.MainAxisAlignment.CENTER
+                    alignment=ft.MainAxisAlignment.CENTER,
                 ),
                 bgcolor=ft.Colors.GREEN_700,
                 opacity_on_click=0.3,
                 on_click=next_turn,
-                width=page.width
+                width=page.width / 3
             )
         ],
         horizontal_alignment=ft.CrossAxisAlignment.CENTER,

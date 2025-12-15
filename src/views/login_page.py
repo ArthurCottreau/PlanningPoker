@@ -4,22 +4,28 @@ from misc.save_data import SaveData
 
 def PageLogin(page):
 
-    def create_game(e: ft.FilePickerResultEvent):
+    def create_game(e):
+        page.go('/task')
+
+    def load_game(e: ft.FilePickerResultEvent):
         file = e.files[0]
 
         mySD = SaveData()
+        mySD.reset()
         mySD.load_json(file.path)
 
-        if mySD.get_element("tasks"):
-            page.go('/game')
-
-    def next_click(e):
-        page.go('/page1')
+        if mySD.get_element("users"):
+            if mySD.get_element("tasks"):
+                page.go('/game')
+            else:
+                 print("Cette sauvegarde n'a pas de taches...")
+        else:
+            print("Cette sauvegarde n'a pas d'utilisateurs..")
 
     page.bgcolor = ft.Colors.GREY
 
-    file_picker = ft.FilePicker(on_result=create_game)
-    page.overlay.append(file_picker)
+    file_picker_load = ft.FilePicker(on_result=load_game)
+    page.overlay.append(file_picker_load)
 
     content = ft.Row(
         [
@@ -39,31 +45,6 @@ def PageLogin(page):
                             [ft.Text(value="Conception Agile")],
                             alignment=ft.MainAxisAlignment.CENTER
                         ),
-                        ft.Text(
-                            value="Votre Nom",
-                            weight=ft.FontWeight.BOLD
-                        ),
-                        ft.TextField(
-                            label="ex: Thomas, Julie...",
-                            expand=1
-                        ),
-                        ft.Text(
-                            value="ID de la partie",
-                            weight=ft.FontWeight.BOLD
-                        ),
-                        ft.TextField(
-                            label="ex: Equipe-Alpha",
-                            expand=1
-                        ),
-                        ft.Text(
-                            value="Creer une nouvelle partie",
-                            weight=ft.FontWeight.BOLD
-                        ),
-                        ft.TextField(expand=1),
-                        ft.Checkbox(
-                            label="Mode de jeu Strict",
-                            label_position=ft.LabelPosition.RIGHT,
-                        ),
                         ft.CupertinoButton(
                             content=ft.Row(
                                 [
@@ -80,10 +61,7 @@ def PageLogin(page):
                             ),
                             bgcolor=ft.Colors.INDIGO,
                             opacity_on_click=0.3,
-                            on_click=lambda _: file_picker.pick_files(
-                                allow_multiple=False,
-                                allowed_extensions=["json"]
-                            ),
+                            on_click=create_game,
                             width=page.width
                         ),
                         ft.CupertinoButton(
@@ -102,7 +80,10 @@ def PageLogin(page):
                             ),
                             bgcolor=ft.Colors.GREEN_700,
                             opacity_on_click=0.3,
-                            on_click=next_click,
+                            on_click=lambda _: file_picker_load.pick_files(
+                                allow_multiple=False,
+                                allowed_extensions=["json"]
+                            ),
                             width=page.width
                         )
                     ],
