@@ -50,6 +50,15 @@ def PageGame(page):
     page.overlay.append(file_picker)
 
     def end_game(e):
+        nonlocal current_selection
+
+        # Désélectionne la carte lorsque le choix du joueur est confirmé
+        current_selection.bgcolor = ft.Colors.WHITE
+        current_selection.border = ft.border.all(2, ft.Colors.BLUE_200)
+        current_selection.scale = 1.0
+        current_selection = None
+        result_text.value = "Veuillez choisir une estimation"
+
         user_name.value = ""
         task_text.value = "Êtes-vous prêts?"
 
@@ -125,7 +134,9 @@ def PageGame(page):
                     if page.session.get("game_started"):
                         if results[names[user_turn]] == "☕":
                             if len(set(results.values())) == 1:
+                                task_turn -= 1
                                 end_game(e)
+                                return
 
                     user_name.value = names[user_turn]
                     task_text.value = "Tache : " + tasks[str(task_turn - 1)]
