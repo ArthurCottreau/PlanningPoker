@@ -1,4 +1,3 @@
-import flet as ft
 import json
 
 from misc.singleton import singleton
