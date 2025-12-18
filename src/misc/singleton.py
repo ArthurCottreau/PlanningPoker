@@ -1,4 +1,7 @@
 def singleton(class_):
+    """
+    @brief Décorateur pour créer une classe singleton
+    """
     instances = {}
     def getinstance(*args, **kwargs):
         if class_ not in instances:

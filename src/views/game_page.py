@@ -3,6 +3,11 @@ import flet as ft
 from misc.save_data import SaveData
 
 def PageGame(page):
+    """
+    @author COTTREAU Arthur et ZHENG Zehua
+    @brief Page du jeu.
+    Gestion de l'interface du jeu et de l'interaction utilisateur avec les cartes de poker, ainsi que la sauvegarde et la fin de la partie.
+    """
     page.bgcolor = ft.Colors.WHITE
 
     task_text = ft.Text(
@@ -44,12 +49,19 @@ def PageGame(page):
 
 
     def save_game(e: ft.FilePickerResultEvent):
+        """
+        @brief Fonction qui sauvegarde la partie dans un fichier JSON
+        @param e: Variable contenant des données lié aux choix dans l'explorateur de fichiers
+        """
         mySD.save_json(e.path)
 
     file_picker = ft.FilePicker(on_result=save_game)
     page.overlay.append(file_picker)
 
     def end_game(e):
+        """
+        @brief Fonction qui met fin à la partie et sauvegarde les résultats
+        """
         nonlocal current_selection
 
         # Désélectionne la carte lorsque le choix du joueur est confirmé
@@ -67,6 +79,9 @@ def PageGame(page):
         page.go('/')       
 
     def next_turn(e):
+        """
+        @brief Fonction qui gère chaque tour de la partie
+        """
         nonlocal names
         nonlocal tasks
         nonlocal user_turn
@@ -160,6 +175,9 @@ def PageGame(page):
         page.update()
 
     def card_clicked(e):
+        """
+        @brief Gestion du clic sur une carte
+        """
         nonlocal current_selection
         clicked_container = e.control
         

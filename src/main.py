@@ -3,6 +3,10 @@ import flet as ft
 from views.router import Router
 
 def main(page: ft.Page):
+    """
+    @brief Fonction principale de l'application
+    @param page: Page de l'application
+    """
     page.title = "Planning Poker"
 
     myRouter = Router(page)

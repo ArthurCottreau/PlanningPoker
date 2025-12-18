@@ -4,11 +4,19 @@ from misc.save_data import SaveData
 from misc.tasks import Task
 
 def PageTask(page):
+    """ 
+    @author COTTREAU Arthur
+    @brief Page pour la création de JSON contenant les tâches
+    @param page: Page de l'application
+    """
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
     txt_number = ft.TextField(value="0", text_align=ft.TextAlign.RIGHT, width=100)
 
     def add_name_clicked(e):
+        """
+        @brief Fonction qui ajoute le nom entré à la liste de noms
+        """
         if new_name.value:
             name = Task(new_name.value, name_delete)
             names.controls.append(name)
@@ -16,11 +24,19 @@ def PageTask(page):
             new_name.focus()
             page.update()
 
-    def name_delete(task):
-        names.controls.remove(task)
+    def name_delete(nom):
+        """
+        @brief Fonction qui supprime le nom sélectionné de la liste de noms
+        @param nom: Le nom qu'on souhaite supprimer
+        """
+        names.controls.remove(nom)
         page.update()
 
     def save_tasks(e: ft.FilePickerResultEvent):
+        """
+        @brief Fonction qui sauvegarde les tâches et les noms dans un fichier JSON
+        @param e: Variable contenant des données lié aux choix dans l'explorateur de fichiers
+        """
         mySD = SaveData()
         mySD.reset()
         
@@ -48,9 +64,12 @@ def PageTask(page):
             print("Tu ne peux pas avoir aucun utilisateur(s) ou aucune tache(s)")
 
     def click_save(e):
-        file_picker.save_file()
+        file_picker.save_file() # Bizarrement, je ne pouvais pas appeler la fonction directement
 
     def add_clicked(e):
+        """
+        @brief Fonction qui ajoute la tâche entré à la liste de tâches
+        """
         if new_task.value:
             task = Task(new_task.value, task_delete)
             tasks.controls.append(task)
@@ -59,6 +78,10 @@ def PageTask(page):
             page.update()
 
     def task_delete(task):
+        """
+        @brief Fonction qui supprime la tâches sélectionné de la liste de tâches
+        @param task: La tâche qu'on souhaite supprimer
+        """
         tasks.controls.remove(task)
         page.update()
 
