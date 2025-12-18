@@ -3,10 +3,6 @@ import flet as ft
 from misc.save_data import SaveData
 from misc.tasks import Task
 
-"""
-@file
-"""
-
 def PageTask(page):
     """ 
     @author COTTREAU Arthur

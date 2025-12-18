@@ -2,10 +2,6 @@ import flet as ft
 
 from views.router import Router
 
-"""
-@file
-"""
-
 def main(page: ft.Page):
     """
     @brief Fonction principale de l'application

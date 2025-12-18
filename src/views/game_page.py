@@ -3,10 +3,6 @@ import flet as ft
 from misc.save_data import SaveData
 from misc.dict_operations import DictOperations
 
-"""
-@file
-"""
-
 def PageGame(page):
     """
     @author COTTREAU Arthur et ZHENG Zehua
