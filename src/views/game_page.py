@@ -1,14 +1,15 @@
 import flet as ft
 
 from misc.save_data import SaveData
+from misc.dict_operations import DictOperations
 
 """
 @file
-@author COTTREAU Arthur et ZHENG Zehua
 """
 
 def PageGame(page):
     """
+    @author COTTREAU Arthur et ZHENG Zehua
     @brief Page du jeu. Gestion de l'interface du jeu et de l'interaction utilisateur avec les cartes de poker, ainsi que la sauvegarde et la fin de la partie.
     @param page: Page de l'application
     @return content: Contenu de la page pour le jeu
@@ -124,25 +125,21 @@ def PageGame(page):
                     if mySD.get_element("gm_moyenne"):
                         # Un 1er tour d'unanimité - mode de jeu moyenne
                         if first_turn == 0:
-                            if len(set(results.values())) != 1:
-                                task_turn -= 1
-                            else:
+                            if DictOperations.is_dict_unanimous(results):
                                 task_turn -= 1
                                 first_turn += 1
+                            else:
+                                task_turn -= 1
                         else:
                             first_turn = 0
 
-                            sum_result = 0
-                            for value in results.values():
-                                sum_result += int(value)
-                            
-                            turn_results[task_turn - 1] = sum_result / len(results)
+                            turn_results[task_turn - 1] = DictOperations.dict_avg(results)
                     else:
                         # Pour l'unanimité - mode de jeu strict
-                        if len(set(results.values())) != 1:
-                            task_turn -= 1
-                        else:
+                        if DictOperations.is_dict_unanimous(results):
                             turn_results[task_turn - 1] = results[user_name.value]
+                        else:
+                            task_turn -= 1
                     
                     mySD.set_element("results",turn_results)
 
@@ -154,7 +151,7 @@ def PageGame(page):
                     # Vérifie si tout le monde a sélectionner le café
                     if page.session.get("game_started"):
                         if results[names[user_turn]] == "☕":
-                            if len(set(results.values())) == 1:
+                            if DictOperations.is_dict_unanimous(results):
                                 task_turn -= 1
                                 end_game(e)
                                 return
