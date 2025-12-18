@@ -3,11 +3,24 @@ import flet as ft
 from misc.save_data import SaveData
 
 def PageLogin(page):
+    """
+    @author COTTREAU Arthur
+    @brief Page menu
+    @param page: Page de l'application
+    @var content: Contenu de la page de connexion et création d'interface
+    """
 
     def create_game(e):
+        """
+        @brief Création d'une nouvelle partie et ouverture de la page "task"
+        """
         page.go('/task')
 
     def load_game(e: ft.FilePickerResultEvent):
+        """
+        @brief Chargement d'une partie existante
+        @param e: Fichier JSON de sauvegarde a charger
+        """
         file = e.files[0]
 
         mySD = SaveData()

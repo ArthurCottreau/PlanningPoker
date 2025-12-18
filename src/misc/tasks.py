@@ -1,7 +1,17 @@
 import flet as ft
 
 class Task(ft.Column):
+    """
+    @author COTTREAU Arthur
+    @class Task
+    @brief Classe pour chaque tâches sur la page pour générer le JSON
+    """
     def __init__(self, task_name, task_delete):
+        """
+        @brief Constructeur de la classe
+        @param task_name: Texte pour chaque tâche
+        @param task_delete: Contient la fonction pour supprimer l'objet de la page
+        """
         super().__init__()
         self.task_name = task_name
         self.task_delete = task_delete
@@ -53,16 +63,25 @@ class Task(ft.Column):
         self.controls = [self.display_view, self.edit_view]
 
     def edit_clicked(self, e):
+        """
+        @brief Fonction pour modifier une tache
+        """
         self.edit_name.value = self.display_task.value
         self.display_view.visible = False
         self.edit_view.visible = True
         self.update()
 
     def save_clicked(self, e):
+        """
+        @brief Fonction pour sauvegarder une tache
+        """
         self.display_task.value = self.edit_name.value
         self.display_view.visible = True
         self.edit_view.visible = False
         self.update()
 
     def delete_clicked(self, e):
+        """
+        @brief Fonction pour supprimer une tache
+        """
         self.task_delete(self)
