@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['task_0',['Task',['../classtasks_1_1Task.html',1,'tasks']]]
+  ['savedata_0',['SaveData',['../classsave__data_1_1SaveData.html',1,'save_data']]]
 ];

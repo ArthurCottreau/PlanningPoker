@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['router_0',['Router',['../classrouter_1_1Router.html',1,'router']]]
+  ['dictoperations_0',['DictOperations',['../classdict__operations_1_1DictOperations.html',1,'dict_operations']]]
 ];
