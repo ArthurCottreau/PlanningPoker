@@ -3,14 +3,18 @@ import flet as ft
 from misc.save_data import SaveData
 from misc.tasks import Task
 
+"""
+@file
+@author COTTREAU Arthur
+"""
+
 def PageTask(page):
     """ 
-    @author COTTREAU Arthur
-    @fn PageTask
     @brief Page pour la création de JSON contenant les tâches
     @param page: Page de l'application
     @return content: Contenu de la page de création de JSON pour une partie
     """
+    
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
     txt_number = ft.TextField(value="0", text_align=ft.TextAlign.RIGHT, width=100)

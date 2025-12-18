@@ -1,3 +1,7 @@
+"""
+@file
+"""
+
 def singleton(class_):
     """
     @fn singleton

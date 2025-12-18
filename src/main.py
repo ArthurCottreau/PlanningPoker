@@ -2,9 +2,13 @@ import flet as ft
 
 from views.router import Router
 
+"""
+@file
+@author COTTREAU Arthur
+"""
+
 def main(page: ft.Page):
     """
-    @fn main
     @brief Fonction principale de l'application
     @param page: Page de l'application
     """
