@@ -1,7 +1,7 @@
 # Doxyfile for MyPythonProject
 
 # Project name
-PROJECT_NAME           = "Documentation Planning Poker"
+PROJECT_NAME           = "Planning Poker"
 
 # Project version
 PROJECT_NUMBER         = 1.0

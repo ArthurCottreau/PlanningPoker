@@ -2,10 +2,6 @@ import flet as ft
 
 from misc.save_data import SaveData
 
-"""
-@file
-"""
-
 def PageLogin(page):
     """
     @author COTTREAU Arthur
