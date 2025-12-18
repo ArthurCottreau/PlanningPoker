@@ -5,11 +5,11 @@ from misc.tasks import Task
 
 """
 @file
-@author COTTREAU Arthur
 """
 
 def PageTask(page):
     """ 
+    @author COTTREAU Arthur
     @brief Page pour la création de JSON contenant les tâches
     @param page: Page de l'application
     @return content: Contenu de la page de création de JSON pour une partie

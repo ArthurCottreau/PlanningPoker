@@ -4,7 +4,6 @@ from views.router import Router
 
 """
 @file
-@author COTTREAU Arthur
 """
 
 def main(page: ft.Page):

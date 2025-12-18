@@ -25,6 +25,7 @@ class SaveData:
         """
         @brief Fonction qui vérifie si le fichier est un JSON valide
         @param myjson: Contenu du fichier à vérifier
+        @return True ou False dépendant de si le contenu du fichier correspond à celui d'un JSON ou pas
         """
         try:
             json.loads(myjson)
@@ -73,6 +74,7 @@ class SaveData:
         """
         @brief Récupère un élément JSON
         @param element: Clef JSON qui nous permet de récupérer une valeur
+        @return Retourne la valeur de la Clef
         """
         if element in self.file_data:
             return self.file_data[element]
