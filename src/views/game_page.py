@@ -2,14 +2,18 @@ import flet as ft
 
 from misc.save_data import SaveData
 
+"""
+@file
+@author COTTREAU Arthur et ZHENG Zehua
+"""
+
 def PageGame(page):
     """
-    @author COTTREAU Arthur et ZHENG Zehua
-    @fn PageGame
-    @brief Page du jeu.
-    Gestion de l'interface du jeu et de l'interaction utilisateur avec les cartes de poker, ainsi que la sauvegarde et la fin de la partie.
+    @brief Page du jeu. Gestion de l'interface du jeu et de l'interaction utilisateur avec les cartes de poker, ainsi que la sauvegarde et la fin de la partie.
+    @param page: Page de l'application
     @return content: Contenu de la page pour le jeu
     """
+    
     page.bgcolor = ft.Colors.WHITE
 
     task_text = ft.Text(

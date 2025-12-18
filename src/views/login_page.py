@@ -2,10 +2,13 @@ import flet as ft
 
 from misc.save_data import SaveData
 
+"""
+@file
+@author COTTREAU Arthur
+"""
+
 def PageLogin(page):
     """
-    @author COTTREAU Arthur
-    @fn PageLogin
     @brief Page menu
     @param page: Page de l'application
     @return content: Contenu de la page de connexion et création d'interface
@@ -67,7 +70,7 @@ def PageLogin(page):
                                         color=ft.Colors.WHITE
                                     ),
                                     ft.Text(
-                                        value="Creer Partie",
+                                        value="Creer un JSON",
                                         color=ft.Colors.WHITE
                                     ),
                                 ],
@@ -86,7 +89,7 @@ def PageLogin(page):
                                         color=ft.Colors.WHITE
                                     ),
                                     ft.Text(
-                                        value="Rejoindre Partie",
+                                        value="Charger un JSON",
                                         color=ft.Colors.WHITE
                                     ),
                                 ],
