@@ -5,8 +5,10 @@ from misc.save_data import SaveData
 def PageGame(page):
     """
     @author COTTREAU Arthur et ZHENG Zehua
+    @fn PageGame
     @brief Page du jeu.
     Gestion de l'interface du jeu et de l'interaction utilisateur avec les cartes de poker, ainsi que la sauvegarde et la fin de la partie.
+    @return content: Contenu de la page pour le jeu
     """
     page.bgcolor = ft.Colors.WHITE
 

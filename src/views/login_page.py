@@ -5,9 +5,10 @@ from misc.save_data import SaveData
 def PageLogin(page):
     """
     @author COTTREAU Arthur
+    @fn PageLogin
     @brief Page menu
     @param page: Page de l'application
-    @var content: Contenu de la page de connexion et création d'interface
+    @return content: Contenu de la page de connexion et création d'interface
     """
 
     def create_game(e):

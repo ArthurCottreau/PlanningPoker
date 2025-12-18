@@ -1,5 +1,6 @@
 def singleton(class_):
     """
+    @fn singleton
     @brief Décorateur pour créer une classe singleton
     """
     instances = {}

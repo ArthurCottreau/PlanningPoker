@@ -4,6 +4,7 @@ from views.router import Router
 
 def main(page: ft.Page):
     """
+    @fn main
     @brief Fonction principale de l'application
     @param page: Page de l'application
     """

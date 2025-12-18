@@ -6,8 +6,10 @@ from misc.tasks import Task
 def PageTask(page):
     """ 
     @author COTTREAU Arthur
+    @fn PageTask
     @brief Page pour la création de JSON contenant les tâches
     @param page: Page de l'application
+    @return content: Contenu de la page de création de JSON pour une partie
     """
     page.vertical_alignment = ft.MainAxisAlignment.CENTER
 
